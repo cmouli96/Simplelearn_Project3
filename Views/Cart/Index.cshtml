@@ -1,0 +1,62 @@
+﻿@model IEnumerable<e_commerce.Models.TblOrder>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="index" asp-controller="Admin">Add New Items to Cart</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+            Company Name
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+           
+            <td>
+                @Html.ActionLink("Edit", "EditCart", new {name=item.Uname,pid=item.Pid}) |
+                @Html.ActionLink("Details", "Details", new { name = item.Uname, pid = item.Pid }) |
+                @Html.ActionLink("Delete", "DeleteItemCart", new { name = item.Uname, pid = item.Pid })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+Total Amount to be paid : @ViewBag.total
+
+PayMent Methods:
+<a asp-action="CheckOut" asp-controller="cart">Debit Card</a>
+<a asp-action="CheckOut" asp-controller="cart">Credit Card</a>
+<a asp-action="CheckOut" asp-controller="cart">Cash</a>

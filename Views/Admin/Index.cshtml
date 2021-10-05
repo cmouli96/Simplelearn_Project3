@@ -1,0 +1,75 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Microsoft.AspNetCore.Identity.IdentityUser> signInManager;
+
+
+@model IEnumerable<e_commerce.Models.TblProduct>
+
+@{
+    ViewData["Title"] = "Available Products";
+}
+
+<h1>Available Products</h1>
+
+@if (signInManager.IsSignedIn(User) && ( User.IsInRole("admin") || User.IsInRole("seller") ))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sname)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sname)
+                </td>
+                <td>
+
+
+
+
+                    @if (signInManager.IsSignedIn(User) && (User.IsInRole("admin") || User.IsInRole("seller")))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Pid">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Pid">Delete</a>
+                    }
+
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("user") && !User.IsInRole("admin") && !User.IsInRole("seller"))
+                    {
+                        <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.Pid"> Add To Cart</a>
+                    }
+
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

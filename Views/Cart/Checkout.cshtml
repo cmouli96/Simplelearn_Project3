@@ -1,0 +1,47 @@
+﻿@model IEnumerable<e_commerce.Models.TblOrder>
+
+@{
+    ViewData["Title"] = "checkout";
+}
+
+@*<h1>Bill Summary</h1>*@
+
+Congratulations! your order is Placed
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+
+
+
+            </tr>
+        }
+
+
+    </tbody>
+</table>*@
+@ViewBag.total
+

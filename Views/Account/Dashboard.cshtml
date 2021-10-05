@@ -1,0 +1,14 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Microsoft.AspNetCore.Identity.IdentityUser> signInManager;
+
+<h1> Welcome to Dasboard...</h1>
+
+@ViewBag.msg
+
+<a asp-controller="Admin" asp-action="index">View Products</a>
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("admin") )
+{
+    <a asp-controller="Administration" asp-action="index">Administration</a>
+
+}
+<a asp-controller="Account" asp-action="logout">Log Out</a>
